@@ -38,10 +38,10 @@ module Account
 
     def confirmEmail
         client = Temp::Mail::Client.new;
-	    email = client.incoming_emails(@data['email']);
-	    str1 = email.first.to_s;
-	    uri = str1[str1.index('https://'), str1.index('">') - str1.index('https://') - 1];
-	    @agent.get(uri);        
+	emails = client.incoming_emails(@data['email']);
+	email = emails.first.to_s;
+	confirmation_link = email[email.index('https://'), email.index('">') - email.index('https://') - 1];
+	@agent.get(confirmation_link);        
     end
     
 end
